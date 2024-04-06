@@ -8,6 +8,20 @@ app.use(express.json());
 
 // Ruta para el proxy
 
+app.get("/", (req, res)=>{
+    const html=`<html>
+                    <head>
+                        <title>node js test</title>
+                        <body>
+                            <h1>proxy test</h1>
+                        </body>
+                    </head>
+                </html>
+    `;
+
+    res.send(html);
+});
+
 app.get('/proxyget', async (req, res)=>{
     console.log("llega"+req.url);
 
@@ -23,7 +37,8 @@ app.get('/proxyget', async (req, res)=>{
 
         console.log(response); 
     }catch(error){
-        res.status(error.response || 500).json({ error: error.message });  
+        res.status(error.response || 500).json({ error: error.message });
+        res.send(error.message);  
     }
 })
 
